@@ -199,7 +199,7 @@ FExecStatus FObjectHandler::GetObjectList(const TArray<FString>& Args)
 	FString StrActorList;
 	for (AActor* Actor : ActorList)
 	{
-		StrActorList += FString::Printf(TEXT("%s "), *Actor->GetName());
+		StrActorList += FString::Printf(TEXT("%s \n"), *Actor->GetName());
 	}
 	return FExecStatus::OK(StrActorList);
 }

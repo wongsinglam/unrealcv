@@ -58,6 +58,7 @@ void FObjectAnnotator::SetAnnotationColor(AActor* Actor, const FColor& Annotatio
 	}
 	this->AnnotationColors.Emplace(Actor->GetName(), AnnotationColor);
 	// TODO: Remote AnnotationColor Map!
+	
 }
 
 void FObjectAnnotator::GetAnnotationColor(AActor* Actor, FColor& AnnotationColor)
@@ -97,6 +98,29 @@ void FObjectAnnotator::GetAnnotationColor(AActor* Actor, FColor& AnnotationColor
 	// check(AnnotationColor == AnnotationComponent->AnnotationColor);
 	AnnotationColor = AnnotationComponent->GetAnnotationColor();
 }
+
+void FObjectAnnotator::SetComponentAnnotationColor(AActor* Actor, const TArray<FColor>& TAnnotationColor)
+{
+	if (!IsValid(Actor))
+	{
+		return;
+	}
+	TArray<UActorComponent*> AnnotationComponents = Actor->GetComponentsByClass(UAnnotationComponent::StaticClass());
+	if (AnnotationComponents.Num() == 0)
+	{
+		UE_LOG(LogUnrealCV, Warning, TEXT("Can not annotate sub components of the actor"));
+		return;
+	}
+	else
+	{
+		SetAnnotationComponent(Actor, TAnnotationColor);
+	}
+
+}
+
+
+
+
 
 void FObjectAnnotator::GetAnnotableActors(UWorld* World, TArray<AActor*>& ActorArray)
 {
@@ -162,10 +186,46 @@ void FObjectAnnotator::UpdateAnnotationComponent(AActor* Actor, const FColor& An
 	for (UActorComponent* Component : AnnotationComponents)
 	{
 		UAnnotationComponent* AnnotationComponent = Cast<UAnnotationComponent>(Component);
+
+		/*
+		if (AnnotationComponents.Find(Component)==1)
+		{
+
+			FColor Anno(0, 0, 0, 255);
+			AnnotationComponent->SetAnnotationColor(Anno);
+			AnnotationComponent->MarkRenderStateDirty();
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("%s"), *Component->GetName());
+			FColor Anno(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0, 255);
+			AnnotationComponent->SetAnnotationColor(Anno);
+			//AnnotationComponent->SetAnnotationColor(AnnotationColor);
+			AnnotationComponent->MarkRenderStateDirty();
+		}
+		*/
 		AnnotationComponent->SetAnnotationColor(AnnotationColor);
 		AnnotationComponent->MarkRenderStateDirty();
 	}
 }
+
+void FObjectAnnotator::SetAnnotationComponent(AActor* Actor, const TArray<FColor>& TAnnotationColor)
+{
+	if (!IsValid(Actor))
+	{
+		UE_LOG(LogUnrealCV, Warning, TEXT("Invalid actor in CreateAnnotationComponent"));
+		return;
+	}
+	TArray<UActorComponent*> AnnotationComponents = Actor->GetComponentsByClass(UAnnotationComponent::StaticClass());
+	for (UActorComponent* Component : AnnotationComponents)
+	{
+		UAnnotationComponent* AnnotationComponent = Cast<UAnnotationComponent>(Component);
+
+		AnnotationComponent->SetAnnotationColor(TAnnotationColor[AnnotationComponents.Find(Component)]);
+		AnnotationComponent->MarkRenderStateDirty();
+	}
+}
+
 
 FColor FObjectAnnotator::GetDefaultColor(AActor* Actor)
 {

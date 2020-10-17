@@ -20,7 +20,7 @@ UAnnotationCamSensor::UAnnotationCamSensor(const FObjectInitializer& ObjectIniti
 	this->ShowFlags.SetTonemapper(false); // Important to disable this
 
 	this->PostProcessSettings.bOverride_AutoExposureBias = true;
-	this->PostProcessSettings.AutoExposureBias = 0; // Overwrite anychange in the scene.
+	this->PostProcessSettings.AutoExposureBias = 0; // Overwrite any change in the scene.
 	// Note: The "exposure compensation" in "PostProcessVolume3" in the RR map will destroy the color
 	// Note: Saturate the color to 1. This is a mysterious behavior after tedious debug.
 	// Note: and the PostProcessing false here seems obvious not enough.

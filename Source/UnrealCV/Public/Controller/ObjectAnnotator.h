@@ -38,6 +38,12 @@ public:
 	// Get annotation color for an actor
 	void GetAnnotationColor(AActor* Actor, FColor& AnnotationColor);
 
+	//Set components' annotation color
+	void SetComponentAnnotationColor(AActor* Actor, const TArray<FColor>& TAnnotationColor);
+
+	// Get components' annotation color
+	void GetComponentAnnotationColor(AActor* Actor, const TArray<FColor>& TAnnotationColor);
+
 	TMap<FString, FColor> GetAnnotationColors() { return AnnotationColors; }
 
 private:
@@ -52,6 +58,9 @@ private:
 	void CreateAnnotationComponent(AActor* Actor, const FColor& AnnotationColor);
 	// Update existing annotation components with a new color
 	void UpdateAnnotationComponent(AActor* Actor, const FColor& AnnotationColor);
+
+	//Set colors of sub-components of the actor
+	void SetAnnotationComponent(AActor* Actor, const TArray<FColor>& TAnnotationColor);
 
 	// Use AActor* not FString ActorId
 	// void SetObjectStencilId(FString ObjectId, const uint8 StencilId);
