@@ -76,7 +76,7 @@ namespace UnrealBuildTool.Rules
 		// 4.16 or better
 		{
 			bEnforceIWYU = true;
-	  		bFasterWithoutUnity = true;
+			bUseUnity = true;
 			PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 			// This trick is from https://answers.unrealengine.com/questions/258689/how-to-include-private-header-files-of-other-modul.html
