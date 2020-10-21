@@ -165,14 +165,14 @@ float UFusionCamSensor::GetSensorFOV()
 	return this->LitCamSensor->GetFOV(); 
 }
 
-void UFusionCamSensor::SetSensorFOV(float fov)
+void UFusionCamSensor::SetSensorFOV(float FOV)
 {
-	this->FOV = fov;
+	this->FOV = FOV;
 	for (UBaseCameraSensor* Sensor: FusionSensors)
 	{
 		if (IsValid(Sensor))
 		{
-			Sensor->SetFOV(fov);
+			Sensor->SetFOV(FOV);
 		}
 	}
 }
