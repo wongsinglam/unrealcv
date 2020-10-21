@@ -160,7 +160,7 @@ FPrimitiveViewRelevance FStaticAnnotationSceneProxy::GetViewRelevance(const FSce
 		FPrimitiveViewRelevance ViewRelevance;
 		ViewRelevance.bDrawRelevance = 0; 
 		// This will make the AnnotationComponent gets ignored if the Materials flag is on
-		// Which means it won't affect regularly rendering.
+		// Which means it won't affect regulary rendering.
 		return ViewRelevance;
 	}
 	else
@@ -372,7 +372,7 @@ FPrimitiveSceneProxy* UAnnotationComponent::CreateSceneProxy(USkeletalMeshCompon
 }
 
 
-// TODO: This needs to be invoked when the ParentComponent refresh its render state, otherwise it will crash the engine
+// TODO: This needs to be involked when the ParentComponent refresh its render state, otherwise it will crash the engine
 FPrimitiveSceneProxy* UAnnotationComponent::CreateSceneProxy()
 {
 	// UMaterialInstanceDynamic* AnnotationMID = UMaterialInstanceDynamic::Create(AnnotationMaterial, this);
